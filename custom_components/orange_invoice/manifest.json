@@ -1,7 +1,7 @@
 {
   "domain": "orange_invoice",
   "name": "Orange Romania",
-  "codeowners": ["@PanTeraS"],
+  "codeowners": ["@Westeru"],
   "config_flow": true,
   "documentation": "https://github.com/Westeru/Orange-Romania-Invoice-Scraper",
   "integration_type": "hub",
