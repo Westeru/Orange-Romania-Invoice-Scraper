@@ -7,13 +7,21 @@ from collections.abc import Mapping
 from typing import Any
 
 import voluptuous as vol
-from homeassistant.config_entries import ConfigEntry, ConfigFlow, ConfigFlowResult
+from homeassistant.config_entries import ConfigEntry, ConfigFlow, ConfigFlowResult, OptionsFlow
 from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
+from homeassistant.core import callback
 from homeassistant.helpers.aiohttp_client import async_create_clientsession
 
 from .api import OrangeApiClient, OrangeAuthError, OrangeError
 from .auth import OrangeOAuth
-from .const import AUTH_PASSWORD, CONF_AUTH_METHOD, CONF_REFRESH_TOKEN, DOMAIN
+from .const import (
+    AUTH_PASSWORD,
+    CONF_AUTH_METHOD,
+    CONF_REFRESH_TOKEN,
+    DOMAIN,
+    CONF_SCAN_INTERVAL_MIN,
+    DEFAULT_SCAN_INTERVAL_MIN,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -92,3 +100,41 @@ class OrangeConfigFlow(ConfigFlow, domain=DOMAIN):
     ) -> ConfigFlowResult:
         self._reauth_entry = self._get_reauth_entry()
         return await self.async_step_user()
+
+    @staticmethod
+    @callback
+    def async_get_options_flow(
+        config_entry: ConfigEntry,
+    ) -> OrangeOptionsFlowHandler:
+        """Get the options flow for this handler."""
+        return OrangeOptionsFlowHandler(config_entry)
+
+
+class OrangeOptionsFlowHandler(OptionsFlow):
+    """Handle options flow for Orange Romania."""
+
+    def __init__(self, config_entry: ConfigEntry) -> None:
+        """Initialize options flow."""
+        self.config_entry = config_entry
+
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Manage the options."""
+        if user_input is not None:
+            return self.async_create_entry(title="", data=user_input)
+
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(
+                        CONF_SCAN_INTERVAL_MIN,
+                        default=self.config_entry.options.get(
+                            CONF_SCAN_INTERVAL_MIN, DEFAULT_SCAN_INTERVAL_MIN
+                        ),
+                    ): vol.All(vol.Coerce(int), vol.Range(min=15)),
+                }
+            ),
+        )
+

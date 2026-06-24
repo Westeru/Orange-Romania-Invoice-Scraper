@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import logging
+from datetime import timedelta
 from typing import Any
 
 from homeassistant.config_entries import ConfigEntry
@@ -12,7 +13,12 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, Upda
 
 from .api import OrangeApiClient, OrangeAuthError, OrangeError
 from .auth import OrangeOAuth
-from .const import CONF_REFRESH_TOKEN, DEFAULT_SCAN_INTERVAL, DOMAIN
+from .const import (
+    CONF_REFRESH_TOKEN,
+    CONF_SCAN_INTERVAL_MIN,
+    DEFAULT_SCAN_INTERVAL_MIN,
+    DOMAIN,
+)
 
 _LOGGER = logging.getLogger(__name__)
 
@@ -27,8 +33,14 @@ class OrangeDataCoordinator(DataUpdateCoordinator[dict[str, Any]]):
         client: OrangeApiClient,
         auth: OrangeOAuth,
     ) -> None:
+        scan_interval_min = entry.options.get(
+            CONF_SCAN_INTERVAL_MIN, DEFAULT_SCAN_INTERVAL_MIN
+        )
         super().__init__(
-            hass, _LOGGER, name=DOMAIN, update_interval=DEFAULT_SCAN_INTERVAL
+            hass,
+            _LOGGER,
+            name=DOMAIN,
+            update_interval=timedelta(minutes=scan_interval_min),
         )
         self.entry = entry
         self.client = client

@@ -39,5 +39,16 @@
       "activation_date": { "name": "Activation date" },
       "phone_credit": { "name": "Phone credit" }
     }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure scan interval",
+        "data": {
+          "scan_interval_min": "Scan interval (minutes, minimum 15)"
+        }
+      }
+    }
   }
 }
+

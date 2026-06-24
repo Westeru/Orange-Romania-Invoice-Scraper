@@ -1,0 +1,53 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Orange România",
+        "description": "Autentificați-vă cu contul dumneavoastră My Orange (adresa de e-mail sau numărul de telefon și parola folosite în aplicația MyOrange). Conexiunea folosește autentificarea securizată a aplicației, astfel încât rămâne conectată — fără cookie-uri, fără reCAPTCHA.",
+        "data": {
+          "username": "E-mail sau număr de telefon",
+          "password": "Parolă"
+        }
+      }
+    },
+    "error": {
+      "invalid_auth": "E-mail/număr de telefon sau parolă greșită.",
+      "cannot_connect": "Nu s-a putut contacta API-ul Orange. Verificați conexiunea și încercați din nou."
+    },
+    "abort": {
+      "already_configured": "Acest cont Orange este deja configurat.",
+      "reauth_successful": "Reautentificarea a fost realizată cu succes."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configurare interval scanare",
+        "data": {
+          "scan_interval_min": "Interval scanare (minute, minim 15)"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "thank_you_points": { "name": "Puncte Thank You" },
+      "thank_you_value": { "name": "Valoare Thank You" },
+      "balance_total": { "name": "Sold restant" },
+      "last_bill_amount": { "name": "Valoare factură precedentă" },
+      "last_bill_date": { "name": "Dată factură precedentă" },
+      "bill_due_date": { "name": "Dată scadentă factură" },
+      "next_bill_date": { "name": "Dată factură următoare" },
+      "installments_count": { "name": "Rate active" },
+      "invoices": { "name": "Facturi" },
+      "subscription": { "name": "Abonament" },
+      "monthly_fee": { "name": "Cost lunar abonament" },
+      "line_status": { "name": "Stare linie" },
+      "extra_cost": { "name": "Cost suplimentar" },
+      "resources_valid_until": { "name": "Resurse valabile până la" },
+      "upgrade_eligible_date": { "name": "Eligibilitate prelungire telefon" },
+      "activation_date": { "name": "Dată activare" },
+      "phone_credit": { "name": "Credit telefon" }
+    }
+  }
+}

@@ -58,5 +58,9 @@ UNLIMITED = "-1"
 # Config keys
 CONF_USERNAME = "username"
 CONF_PASSWORD = "password"
+CONF_SCAN_INTERVAL_MIN = "scan_interval_min"
+
+DEFAULT_SCAN_INTERVAL_MIN = 60
 
 
+   
