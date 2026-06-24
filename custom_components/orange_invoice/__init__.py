@@ -1,12 +1,12 @@
 """The Orange Romania integration.
 
-Author: PanTeraS
+Author: Westeru
 Mobile OAuth login adapted from HAForgeLabs/utilitati_romania (MIT).
 """
 
 from __future__ import annotations
 
-__author__ = "PanTeraS"
+__author__ = "Westeru"
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_PASSWORD, CONF_USERNAME, Platform
